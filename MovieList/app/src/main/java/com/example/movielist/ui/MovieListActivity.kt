@@ -5,19 +5,28 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movielist.R
 import com.example.movielist.model.Movie
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.movie_list_main.*
 
 class MovieListActivity : AppCompatActivity() {
-    private val movies = arrayListOf<Movie>()
+    private var movies = arrayListOf<Movie>()
     private lateinit var viewModel: MovieListActivityViewModel
+    private val adapter = MovieAdapter(movies)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_list_main)
+
+        initView()
+    }
+
+    private fun initView() {
+        rvMovies.layoutManager = GridLayoutManager(this, 2)
+        rvMovies.adapter = adapter
 
         btnSubmit.setOnClickListener { getMoviesFromDatabase() }
         initViewModel()
@@ -40,7 +49,8 @@ class MovieListActivity : AppCompatActivity() {
 
         // Observe the trivia object.
         viewModel.movies.observe(this, Observer {
-            tvPopMovie.text == "gelukt"
+                movies = it
+                adapter.notifyDataSetChanged()
         })
 
         // Observe the error message.
