@@ -1,6 +1,5 @@
 package com.example.movielist.ui
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movielist.database.MovieRepository
@@ -15,21 +14,19 @@ class MovieListActivityViewModel() : ViewModel() {
     val error = MutableLiveData<String>()
 
     fun getMovieData(yearRequested: Int) {
-        repository.getMoviesFromDatabase(yearRequested)
-            .enqueue(object : Callback<List<Movie>> {
+        repository.getMoviesFromDatabase(yearRequested).enqueue(object : Callback<List<Movie>> {
 
-                override fun onResponse(call: Call<List<Movie>>, response: Response<List<Movie>>) {
-                    if (response.isSuccessful) movies.value.apply { response.body() }
-                    else error.value.apply {
-                        "There was an error while retrieving the data \n${response.errorBody()
-                            .toString()}"
-                    }
+            override fun onFailure(call: Call<List<Movie>>, t: Throwable) {
+                error.value = t.message.toString()
+            }
+
+            override fun onResponse(call: Call<List<Movie>>, response: Response<List<Movie>>) {
+                if (response.isSuccessful) movies.value.apply { response.body() }
+                else error.value.apply {
+                    "There was an error while retrieving the data \n${response.errorBody()
+                        .toString()}"
                 }
-
-                override fun onFailure(call: Call<List<Movie>>, t: Throwable) {
-                    error.value = t.message.toString()
-                }
-
-            })
+            }
+        })
     }
 }

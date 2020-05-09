@@ -15,7 +15,7 @@ class MovieAdapter(val movies: List<Movie>): RecyclerView.Adapter<MovieAdapter.V
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(movie: Movie, position: Int){
-           itemView.tvPlaceNumber.text = "${position}."
+//           itemView.tvPlaceNumber.text = "${position}."
             Glide.with(context).load(movie.getPosterUrl()).into(itemView.imageView)
         }
     }
