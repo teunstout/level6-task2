@@ -1,6 +1,7 @@
 package com.example.movielist.ui
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +16,9 @@ class MovieAdapter(val movies: List<Movie>): RecyclerView.Adapter<MovieAdapter.V
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(movie: Movie, position: Int){
-//           itemView.tvPlaceNumber.text = "${position}."
+           itemView.tvPlaceNumber.text = "${position}."
             Glide.with(context).load(movie.getPosterUrl()).into(itemView.imageView)
+            Log.i("image", movie.getPosterUrl())
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.ViewHolder {

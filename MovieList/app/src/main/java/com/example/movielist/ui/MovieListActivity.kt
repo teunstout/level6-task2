@@ -2,6 +2,7 @@ package com.example.movielist.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -49,13 +50,15 @@ class MovieListActivity : AppCompatActivity() {
 
         // Observe the trivia object.
         viewModel.movies.observe(this, Observer {
-                movies = it
-                adapter.notifyDataSetChanged()
+            Log.i("hello", "hello")
+            movies.addAll(it)
+            Log.i("movies", it.toString())
+            adapter.notifyDataSetChanged()
         })
 
         // Observe the error message.
         viewModel.error.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            Log.e("Error", it)
         })
     }
 }
