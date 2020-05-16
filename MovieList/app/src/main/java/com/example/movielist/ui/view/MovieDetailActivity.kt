@@ -2,6 +2,7 @@ package com.example.movielist.ui.view
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
@@ -14,6 +15,7 @@ class MovieDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_advanced)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initView()
     }
@@ -31,6 +33,11 @@ class MovieDetailActivity : AppCompatActivity() {
         } ?: kotlin.run {
             Log.e("movie_not_found", "No movie found")
             finish() }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        finish()
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {

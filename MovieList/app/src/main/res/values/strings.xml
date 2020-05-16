@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Movie List</string>
+    <string name="title_activity_movie_detail">MovieDetailActivity</string>
     <string name="the_most_popular_movies_of">The most popular movies of</string>
     <string name="submit">Submit</string>
     <string name="movie_photo">Movie photo</string>
     <string name="overview">Overview</string>
-    <string name="title_activity_movie_detail">MovieDetailActivity</string>
     <string name="releaseDate">release: %s</string>
 </resources>
