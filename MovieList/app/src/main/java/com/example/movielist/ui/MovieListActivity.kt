@@ -50,9 +50,8 @@ class MovieListActivity : AppCompatActivity() {
 
         // Observe the trivia object.
         viewModel.movies.observe(this, Observer {
-            Log.i("hello", "hello")
+            movies.clear()
             movies.addAll(it)
-            Log.i("movies", it.toString())
             adapter.notifyDataSetChanged()
         })
 
