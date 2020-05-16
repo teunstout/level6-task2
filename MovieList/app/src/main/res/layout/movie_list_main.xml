@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MovieListActivity">
+    tools:context=".ui.view.MovieListActivity">
 
     <EditText
         android:id="@+id/etNumber"
@@ -13,8 +13,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/rvMovies"
         app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvPopMovie"
@@ -26,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/the_most_popular_movies_of"
-        app:layout_constraintBottom_toBottomOf="@+id/etNumber"
+        app:layout_constraintBottom_toTopOf="@+id/rvMovies"
         app:layout_constraintEnd_toStartOf="@+id/etNumber"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,12 +38,18 @@
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:height="60dp"
+        android:backgroundTint="@color/colorPrimary"
         android:text="@string/submit"
-        app:layout_constraintBottom_toBottomOf="@+id/etNumber"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/rvMovies"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/etNumber" />
+        app:layout_constraintStart_toEndOf="@+id/etNumber"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMovies"

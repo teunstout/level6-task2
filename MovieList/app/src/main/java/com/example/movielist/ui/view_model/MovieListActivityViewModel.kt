@@ -1,6 +1,5 @@
-package com.example.movielist.ui
+package com.example.movielist.ui.view_model
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.movielist.database.MovieRepository
@@ -9,7 +8,6 @@ import com.example.movielist.model.MovieResponseObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.log
 
 class MovieListActivityViewModel() : ViewModel() {
     private val repository = MovieRepository()

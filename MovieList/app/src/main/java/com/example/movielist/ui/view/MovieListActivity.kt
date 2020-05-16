@@ -1,5 +1,6 @@
-package com.example.movielist.ui
+package com.example.movielist.ui.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,14 +10,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movielist.R
 import com.example.movielist.model.Movie
-import com.google.android.material.snackbar.Snackbar
+import com.example.movielist.ui.view_model.MovieListActivityViewModel
 import kotlinx.android.synthetic.main.movie_list_main.*
 
 class MovieListActivity : AppCompatActivity() {
     private var movies = arrayListOf<Movie>()
     private lateinit var viewModel: MovieListActivityViewModel
-    private val adapter = MovieAdapter(movies)
-
+    private val adapter = MovieAdapter(
+        movies
+    ) { movie -> startIntentDetailedMovie(movie) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,17 +33,6 @@ class MovieListActivity : AppCompatActivity() {
 
         btnSubmit.setOnClickListener { getMoviesFromDatabase() }
         initViewModel()
-    }
-
-    private fun getMoviesFromDatabase() {
-        val year = etNumber.text
-        if (year.length != 4) {
-            Toast.makeText(this, "Please fill in a correct year", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        viewModel.getMovieData(etNumber.text.toString().toInt())
-
     }
 
     private fun initViewModel() {
@@ -59,5 +50,21 @@ class MovieListActivity : AppCompatActivity() {
         viewModel.error.observe(this, Observer {
             Log.e("Error", it)
         })
+    }
+
+    private fun startIntentDetailedMovie(movie: Movie){
+        Log.i("Movie", movie.toString())
+        val movieIntent = Intent(this, MovieDetailActivity::class.java)
+        movieIntent.putExtra(MovieDetailActivity.MOVIE_INTENT, movie)
+        startActivity(movieIntent)
+    }
+
+    private fun getMoviesFromDatabase() {
+        val year = etNumber.text
+        if (year.length != 4) {
+            Toast.makeText(this, "Please fill in a correct year", Toast.LENGTH_SHORT).show()
+            return
+        }
+        viewModel.getMovieData(etNumber.text.toString().toInt())
     }
 }
