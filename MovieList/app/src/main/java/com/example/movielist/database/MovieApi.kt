@@ -11,9 +11,6 @@ class MovieApi(yearMovie: String) {
         // The base url off the api.
         private const val baseUrl = "https://api.themoviedb.org/"
 
-        /**
-         * @return [NumbersApiService] The service class off the retrofit client.
-         */
         fun createApi(): MovieApiService {
             // Create an OkHttpClient to be able to make a log of the network traffic
             val okHttpClient = OkHttpClient.Builder()

@@ -9,7 +9,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MovieListActivityViewModel() : ViewModel() {
+class MovieListActivityViewModel : ViewModel() {
     private val repository = MovieRepository()
     var movies = MutableLiveData<List<Movie>>()
     val error = MutableLiveData<String>()
